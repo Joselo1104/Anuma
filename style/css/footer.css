@@ -1,0 +1,70 @@
+/* =========================================
+   FIX: STICKY FOOTER (Esto es lo nuevo que necesitas)
+   ========================================= */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Obliga al cuerpo a medir el 100% de la pantalla */
+    padding-bottom: 0;
+}
+
+.footer-spacer {
+    height: calc(var(--footer-height, 90px) + 16px);
+    flex-shrink: 0;
+}
+
+/* =========================================
+   TU FOOTER ACTUAL (Con la corrección)
+   ========================================= */
+
+/* Estilos para el footer completo */
+.site-footer {
+    /* 1. Apariencia y Color */
+    background-color: #442D1C;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    
+    /* 2. Diseño y Posición */
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    
+    /* 3. LA LÍNEA MÁGICA */
+    margin-top: 0;
+}
+
+/* Contenedor interno para el texto */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    text-align: left;
+}
+
+/* Estilos para los párrafos de texto */
+.footer-content p {
+    margin: 3px 0;
+    line-height: 1.4;
+    font-size: 14px;
+}
+
+/* Estilo para la información de resolución */
+.resolution-info {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .footer-spacer {
+        height: calc(var(--footer-height, 110px) + 16px);
+    }
+}

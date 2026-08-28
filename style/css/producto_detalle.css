@@ -1,0 +1,289 @@
+/* Contenedor Principal */
+.detalle-container {
+    max-width: 1100px;
+    margin: 150px auto 50px auto;
+    padding: 0 40px;
+    display: grid;
+    /* Columna izquierda (imagen) más ancha que el texto, como en Figma */
+    grid-template-columns: 1.2fr 0.8fr; 
+    gap: 80px; /* Separación grande entre imagen y texto */
+    align-items: start; /* Alineamos arriba para que el texto empiece arriba */
+}
+
+/* --- COLUMNA IZQUIERDA --- */
+.detalle-imagen {
+    width: 100%;
+}
+
+/* --- COLUMNA IZQUIERDA: IMAGEN (Estilo idéntico a la galería) --- */
+
+.img-zoom-container {
+    width: 100%;
+    /* Volvemos al formato vertical 3:4 (igual que en Ropa y Accesorios) */
+    aspect-ratio: 3 / 4; 
+    overflow: hidden;
+    
+    /* Mismo color de fondo gris de las tarjetas */
+    background-color: #f4f4f4; 
+    border-radius: 20px;
+    
+    /* Sombra suave externa (quitamos la interna que se veía rara) */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: crosshair; /* Cursor de mira para el zoom */
+    margin-bottom: 25px;
+}
+
+.img-zoom-container img {
+    width: 100%;
+    height: 100%;
+    /* 'cover' para que la imagen LLENE todo el espacio sin dejar huecos ni líneas blancas */
+    object-fit: cover; 
+    object-position: top center; /* Alineado arriba para no cortar cabezas */
+    
+    transition: transform 0.2s ease-out;
+    
+    /* Quitamos padding y mezclas raras para que se vea limpia */
+}
+
+
+/* --- CONTROLES REUBICADOS --- */
+.detalle-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+/* Selector de Tallas */
+.selector-tallas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+
+
+.talla-btn {
+    background: #743015;
+    border: 1px solid #743015;
+    font-size: 18px;
+    font-weight: 500;
+    color: #FAF1E0;
+    cursor: pointer;
+    padding: 8px 14px;
+    position: relative;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-family: sans-serif;
+    border-radius: 12px;
+}
+
+/* Subrayado rojo al seleccionar */
+.talla-btn.seleccionado {
+    color: #fff;
+    font-weight: bold;
+    background: #442D1C;
+    border-color: #442D1C;
+}
+.talla-btn.seleccionado::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+}
+
+.talla-btn:hover {
+    background: #442D1C;
+    color: #fff;
+}
+
+/* 1. Modificar el estilo base del botón agotado */
+.talla-btn.agotado {
+    color: #ccc; /* Color de letra gris */
+    border-color: #eee;
+   
+    cursor: not-allowed;
+    pointer-events: none;
+    
+    /* CAMBIOS CLAVE: */
+    text-decoration: none; /* Quitamos la línea horizontal fea */
+    position: relative;    /* Necesario para "anclar" la línea diagonal dentro del botón */
+    overflow: hidden;      /* Para que la línea no se salga del cuadradito */
+}
+
+/* 2. Crear la línea diagonal usando ::after */
+.talla-btn.agotado::after {
+    content: '';           /* Crea un elemento vacío */
+    position: absolute;    /* Lo posicionamos libremente */
+    
+    /* Centramos la línea */
+    top: 50%;
+    left: 50%;
+    
+    /* Tamaño y forma de la línea */
+    width: 100%;           /* Largo de la línea (cubre todo el ancho) */
+    height: 1px;           /* Grosor de la línea (puedes poner 2px si la quieres más gruesa) */
+    background-color: #999; /* Color de la línea (un gris un poco más oscuro para que se vea) */
+    
+    /* La magia: Rotamos la línea 45 grados negativos para que vaya de abajo-izq a arriba-der */
+    transform: translate(-50%, -50%) rotate(-45deg); 
+}
+
+/* Botones (Cápsulas grises) */
+.acciones-detalle {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.btn-anadir, .btn-comprar-ahora {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px; /* Letra un poco más pequeña y elegante */
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-anadir {
+    background-color: #777; 
+}
+
+.btn-comprar-ahora {
+    background-color: #888;
+}
+
+.btn-anadir:hover, .btn-comprar-ahora:hover {
+    background-color: #a91e2c;
+    transform: translateY(-2px);
+}
+
+
+/* --- COLUMNA DERECHA: TEXTO --- */
+.detalle-info {
+    padding-top: 20px; /* Un poco de aire arriba */
+    text-align: right; /* Alineación a la derecha según parece sugerir el layout o centrado */
+    /* Nota: En tu imagen Frame 3 el texto se ve justificado o a la derecha, 
+       pero por estándar web suele ser izquierda. Lo dejo a la izquierda por legibilidad 
+       pero centrado verticalmente respecto a la imagen. */
+    text-align: left; 
+}
+
+.categoria-label {
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: none; /* Oculto si no quieres que salga "ROPA Y ACCESORIOS" arriba */
+}
+
+.titulo-producto {
+    font-family: sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+    background-color: #fff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(68, 45, 28, 0.08);
+}
+
+
+.descripcion {
+    color: #555;
+    line-height: 1.8;
+    font-size: 16px;
+    text-align: justify;
+    margin-bottom: 30px;
+
+    /* --- AGREGA ESTAS LÍNEAS PARA CORREGIR EL TEXTO LARGO --- */
+    width: 100%;              /* Asegura que no sea más ancho que su padre */
+    overflow-wrap: break-word; /* Estándar moderno: rompe palabras si no caben */
+    word-wrap: break-word;     /* Soporte para navegadores viejos */
+    word-break: break-word;    /* Asegura el quiebre en palabras muy largas */
+}
+
+.stock-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(68, 45, 28, 0.12);
+    background: #fff;
+    color: #442D1C;
+    padding: 14px 18px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(68, 45, 28, 0.06);
+    margin-top: 20px;
+    max-width: fit-content;
+}
+
+.stock-box span {
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+.stock-box strong {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .detalle-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 120px;
+    }
+    .controles-bajo-imagen {
+        justify-content: center;
+        gap: 30px;
+    }
+}
+
+/* --- TABLA DE TALLAS --- */
+.guia-tallas-container {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.tabla-tallas {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+.tabla-tallas th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-tallas td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.talla-bold {
+    font-weight: bold;
+    background-color: #fafafa;
+}

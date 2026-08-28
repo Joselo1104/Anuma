@@ -1,0 +1,232 @@
+/* =========================================
+   📦 ESTILOS PARA LA PÁGINA DE CARRITO DE COMPRAS
+   ========================================= */
+
+:root {
+    --color-primario: #9e1b32;
+    --color-fondo: #f4f6f9;
+    --color-blanco: #ffffff;
+    --sombra: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita scroll horizontal indeseado */
+}
+
+/* --- CONTENEDOR PRINCIPAL (Escritorio) --- */
+.carrito-contenedor {
+    max-width: 1100px;
+    margin: 160px auto 40px auto; 
+    padding: 30px;
+    background: var(--color-blanco);
+    border-radius: 15px;
+    box-shadow: var(--sombra);
+    position: relative; 
+    z-index: 10; 
+    animation: aparecer 0.5s ease-out;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* --- TABLA (Escritorio) --- */
+.carrito-tabla {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.carrito-tabla th {
+    text-align: left;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 10px 15px;
+}
+
+.carrito-tabla tbody tr {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    transition: transform 0.2s;
+}
+
+.carrito-tabla td {
+    padding: 15px;
+    vertical-align: middle;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.carrito-tabla td:first-child { border-left: 1px solid #f0f0f0; border-radius: 10px 0 0 10px; }
+.carrito-tabla td:last-child { border-right: 1px solid #f0f0f0; border-radius: 0 10px 10px 0; }
+
+/* --- ELEMENTOS INTERNOS --- */
+.producto-info { display: flex; align-items: center; gap: 15px; }
+.carrito-img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+.producto-info span { font-weight: 700; color: #333; display: block; }
+
+.cantidad-controles {
+    display: flex; align-items: center; background: #f8f9fa;
+    border-radius: 20px; padding: 5px; width: fit-content; border: 1px solid #e0e0e0;
+}
+.btn-cantidad {
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    background: white; border-radius: 50%; color: #333; text-decoration: none;
+    font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.cantidad-controles span { margin: 0 12px; font-weight: 600; }
+
+.btn-eliminar {
+    color: #dc3545; background-color: #fff5f5; width: 35px; height: 35px;
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: 0.2s;
+}
+
+/* --- SECCIÓN TOTALES (Escritorio) --- */
+.carrito-totales {
+    margin-top: 30px;
+    margin-left: auto; /* Esto empuja a la derecha en PC */
+    width: 100%;
+    max-width: 350px;
+    background: #fdfdfd;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+.carrito-totales p { display: flex; justify-content: space-between; margin-bottom: 12px; color: #666; }
+.total-final {
+    display: flex; justify-content: space-between;
+    font-size: 1.4rem; font-weight: 800; color: var(--color-primario);
+    margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;
+}
+
+.btn-pagar {
+    display: block; background: #28a745; color: white; text-align: center;
+    padding: 15px; border-radius: 8px; text-decoration: none;
+    font-weight: 700; font-size: 1.1rem; margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+.btn-pagar:hover { background: #218838; transform: translateY(-2px); }
+
+.btn-volver {
+    display: block; text-align: center; margin-top: 15px;
+    color: var(--color-primario); text-decoration: none; font-weight: 600;
+}
+
+/* Estados */
+.fila-pendiente { background-color: #fff5f5 !important; border-left: 4px solid #dc3545 !important; }
+.fila-error { background-color: #ffe6e6 !important; border-left: 4px solid #000 !important; }
+.select-talla-alerta { border: 2px solid #dc3545; color: #dc3545; font-weight: bold; padding: 5px; border-radius: 5px; }
+.alerta-bloqueo { color: #dc3545; margin-top: 15px; font-weight: bold; text-align: center; padding: 10px; background-color: #ffe6e6; border-radius: 6px; }
+.btn-pagar.disabled { background-color: #ccc; cursor: not-allowed; opacity: 0.7; }
+
+
+/* =========================================
+   📱 RESPONSIVE DESIGN (MÓVIL)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    .carrito-contenedor {
+        /* Margen superior seguro y sin ancho fijo */
+        margin: 140px 10px 40px 10px !important;
+        padding: 15px !important;
+        width: auto !important; /* Dejar que fluya */
+        max-width: none !important;
+    }
+
+    /* Tabla a Bloques */
+    .carrito-tabla, .carrito-tabla tbody, .carrito-tabla tr, .carrito-tabla td {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .carrito-tabla thead { display: none !important; }
+
+    /* Tarjetas de Producto */
+    .carrito-tabla tr {
+        margin-bottom: 20px;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        padding: 0;
+        overflow: hidden;
+    }
+
+    /* Cabecera de Tarjeta (Producto) */
+    .carrito-tabla td[data-label="Producto"] {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        background-color: #fcfcfc;
+        border-bottom: 1px solid #eee;
+        padding: 15px;
+    }
+    .carrito-tabla td[data-label="Producto"]::before { display: none; }
+    
+    .producto-info { margin: 0; width: 100%; text-align: left; }
+
+    /* Datos (Precio, etc) */
+    .carrito-tabla td {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 15px;
+        border-bottom: 1px solid #f9f9f9;
+        text-align: right;
+    }
+    
+    /* Etiquetas */
+    .carrito-tabla td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #666;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+
+    /* Botón Eliminar (Pie de tarjeta) */
+    .carrito-tabla td:last-child {
+        padding: 0;
+        border: none;
+    }
+    .btn-eliminar {
+        width: 100%;
+        border-radius: 0;
+        padding: 12px;
+        background-color: #ffebeb;
+        color: #d32f2f;
+        font-weight: 600;
+    }
+    .btn-eliminar::after { content: " Eliminar Producto"; }
+    /* Sección móvil */
+    .carrito-totales {
+        /* Reseteamos todas las propiedades de escritorio */
+        margin: 20px 0 0 0 !important;
+        width: 100% !important;
+        max-width: none !important; /* Quitar límite de 350px */
+        float: none !important;
+        border: 2px solid #eee;
+        box-shadow: none;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+}
