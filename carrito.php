@@ -124,7 +124,7 @@ function getListVar($pdo, $pid) {
                 <?php elseif ($errores): ?><button class="btn-pagar disabled" disabled>Corrige errores</button>
                 <?php else: ?>
                     <?php if (isset($_SESSION['user_id'])): ?><a href="checkout.php" class="btn-pagar">Pagar</a>
-                    <?php else: ?><a href="usuario/login.php?redirect=carrito" class="btn-pagar" style="background:#333">Iniciar Sesión</a><?php endif; ?>
+                    <?php else: ?><a href="usuario/login.php?redirect=carrito" class="btn-pagar btn-login">Iniciar Sesión</a><?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
@@ -183,13 +183,14 @@ function recalc() {
         justify-content:center;
         padding:12px 18px;
         border-radius:999px;
-        background:#e9e9e9;
-        color:#333;
+        background:#faf1e0;
+        color:#442d1c;
         text-decoration:none;
         font-weight:700;
-        border:1px solid #d0d0d0;
-        box-shadow:0 2px 4px rgba(0,0,0,0.06);
+        border:1px solid #e8d1a8;
+        box-shadow:0 2px 4px rgba(68,45,28,0.08);
+        transition:background-color .2s, color .2s, transform .2s;
     }
-    .btn-seguir-comprando:hover { background:#dcdcdc; }
+    .btn-seguir-comprando:hover { background:#e8d1a8; color:#442d1c; transform:translateY(-1px); }
 </style>
 <?php include('bases/footer.php'); ?>

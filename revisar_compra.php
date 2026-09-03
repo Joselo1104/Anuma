@@ -83,12 +83,7 @@ $total_final = $subtotal + $costo_envio; // En tu DB guardaste el subtotal produ
 
     <div class="acciones-finales">
         <h3 class="metodo-title">Metodo de pago</h3>
-        <div class="metodo-pago-box">
-            <div class="metodo-item">
-                <strong>Contra entrega</strong>
-                <span>Pagas al recibir tu pedido</span>
-            </div>
-        </div>
+        
         <div class="metodo-pago-box paypal-box">
             <div class="metodo-item">
                 <strong>PayPal</strong>
@@ -106,7 +101,7 @@ $total_final = $subtotal + $costo_envio; // En tu DB guardaste el subtotal produ
 </div>
 
 <?php if ($paypal_disponible): ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php echo urlencode($paypal_client_id); ?>&currency=USD&intent=capture"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?php echo urlencode($paypal_client_id); ?>&currency=USD&intent=capture&locale=es_EC"></script>
 <script>
     (function () {
         var orderUuid = <?php echo json_encode($order_uuid); ?>;
